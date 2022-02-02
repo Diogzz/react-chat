@@ -1,34 +1,7 @@
+import React from 'react';
+import { useRouter } from 'next/router';
 import { Box, Button, Text, TextField, Image } from '@skynexui/components';
 import appConfig from '../config.json';
-
-function GlobalStyle() {
-	return (
-		<style global jsx>{`
-			* {
-			margin: 0;
-			padding: 0;
-			box-sizing: border-box;
-			list-style: none;
-			}
-			body {
-			font-family: 'Open Sans', sans-serif;
-			}
-			/* App fit Height */ 
-			html, body, #__next {
-			min-height: 100vh;
-			display: flex;
-			flex: 1;
-			}
-			#__next {
-			flex: 1;
-			}
-			#__next > * {
-			flex: 1;
-			}
-			/* ./App fit Height */ 
-		`}</style>
-		);
-	}
 
 function Titulo(props) {
 	const Tag = props.tag || 'h1';
@@ -60,16 +33,16 @@ function Titulo(props) {
 	// export default HomePage
 
 	export default function PaginaInicial() {
-	const username = 'Diogzz';
+	const [username, setUserName] = React.useState('Diogzz');
+	const router = useRouter();
 
 	return (
 	<>
-		<GlobalStyle />
 		<Box
 		styleSheet={{
 			display: 'flex', alignItems: 'center', justifyContent: 'center',
 			backgroundColor: appConfig.theme.colors.primary[500],
-			backgroundImage: 'url(/img/background.jpg)',
+			backgroundImage: `url("/img/${appConfig.theme.backgrounds.fundoPrincipal}")`,
 			backgroundRepeat: 'no-repeat', backgroundSize: 'cover',
 		}}
 		>
@@ -95,8 +68,12 @@ function Titulo(props) {
 				display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
 				width: { xs: '100%', sm: '50%' }, textAlign: 'center', marginBottom: '32px',
 			}}
+			onSubmit={(e)=> {
+				e.preventDefault();	
+				router.push('/chat');
+			}}
 			>
-			<Titulo tag="h2">Boas vindas de volta!</Titulo>
+			<Titulo tag="h2">Bem vindo!</Titulo>
 			<Text variant="body3" styleSheet={{ marginBottom: '32px', color: appConfig.theme.colors.neutrals[300] }}>
 				{appConfig.name}
 			</Text>
@@ -110,6 +87,12 @@ function Titulo(props) {
 					mainColorHighlight: appConfig.theme.colors.primary[500],
 					backgroundColor: appConfig.theme.colors.neutrals[800],
 				},
+				}}
+				value={username}
+				onChange={(e)=> {
+					const valueInputName = e.target.value;
+					setUserName(valueInputName);
+					
 				}}
 			/>
 			<Button
@@ -135,7 +118,7 @@ function Titulo(props) {
 				alignItems: 'center',
 				maxWidth: '200px',
 				padding: '16px',
-				backgroundColor: appConfig.theme.colors.reactColor[500],
+				backgroundColor: appConfig.theme.colors.neutrals[800],
 				border: '1px solid',
 				borderColor: appConfig.theme.colors.neutrals[999],
 				borderRadius: '10px',

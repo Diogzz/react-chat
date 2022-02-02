@@ -1,6 +1,9 @@
 {
-"name": "Aluracord - Matrix (peas)",
+"name": "React - Chat",
 "theme": {
+    "backgrounds":{
+        "fundoPrincipal" :"background.jpg"
+    },
     "colors": {
     "primary": {
         "050": "#E3F9E5",
