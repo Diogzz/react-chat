@@ -60,7 +60,7 @@ function Titulo(props) {
 	// export default HomePage
 
 	export default function PaginaInicial() {
-	const username = 'peas';
+	const username = 'Diogzz';
 
 	return (
 	<>
@@ -69,8 +69,8 @@ function Titulo(props) {
 		styleSheet={{
 			display: 'flex', alignItems: 'center', justifyContent: 'center',
 			backgroundColor: appConfig.theme.colors.primary[500],
-			backgroundImage: 'url(https://virtualbackgrounds.site/wp-content/uploads/2020/08/the-matrix-digital-rain.jpg)',
-			backgroundRepeat: 'no-repeat', backgroundSize: 'cover', backgroundBlendMode: 'multiply',
+			backgroundImage: 'url(/img/background.jpg)',
+			backgroundRepeat: 'no-repeat', backgroundSize: 'cover',
 		}}
 		>
 		<Box
@@ -118,7 +118,7 @@ function Titulo(props) {
 				fullWidth
 				buttonColors={{
 				contrastColor: appConfig.theme.colors.neutrals["000"],
-				mainColor: appConfig.theme.colors.primary[500],
+				mainColor: appConfig.theme.colors.reactColor[300],
 				mainColorLight: appConfig.theme.colors.primary[400],
 				mainColorStrong: appConfig.theme.colors.primary[600],
 				}}
@@ -135,7 +135,7 @@ function Titulo(props) {
 				alignItems: 'center',
 				maxWidth: '200px',
 				padding: '16px',
-				backgroundColor: appConfig.theme.colors.neutrals[800],
+				backgroundColor: appConfig.theme.colors.reactColor[500],
 				border: '1px solid',
 				borderColor: appConfig.theme.colors.neutrals[999],
 				borderRadius: '10px',
