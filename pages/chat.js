@@ -3,9 +3,23 @@ import React from 'react';
 import appConfig from '../config.json';
 
 export default function ChatPage() {
-    // Sua lógica vai aqui
+    const [mensagem, setMensagem] = React.useState('')
+    const [mensagemList, setMensagemList] = React.useState([]);
 
-    // ./Sua lógica vai aqui
+    function handleNovaMensagem(novaMensagem) {
+
+        novaMensagem = {
+            id: mensagemList.length + 1,
+            texto: novaMensagem,
+            usuario: 'Diogo'
+        }
+
+        setMensagemList([
+            novaMensagem,
+            ...mensagemList
+        ]);
+    }
+
     return (
         <Box
             styleSheet={{
@@ -43,8 +57,15 @@ export default function ChatPage() {
                     }}
                 >
 
-                    {/* <MessageList mensagens={[]} /> */}
+                    <MessageList mensagens={mensagemList} />
 
+                    {/* <ul>
+                        {mensagemList.map((mensagemAtual) => {
+                            return (
+                                <li id={mensagemAtual.id} key={mensagemAtual.id}>{mensagemAtual.texto}</li>
+                            )
+                        })}
+                    </ul> */}
                     <Box
                         as="form"
                         styleSheet={{
@@ -53,6 +74,20 @@ export default function ChatPage() {
                         }}
                     >
                         <TextField
+                            value={mensagem}
+                            onChange={(e)=> {
+                                const mensagemText = e.target.value;
+                                setMensagem(mensagemText);
+                            }}
+
+                            onKeyPress={(e)=> {
+                                if(e.key === 'Enter') {
+                                    e.preventDefault;
+                                    handleNovaMensagem(mensagem);
+                                    setMensagem('');
+                                }
+                            }}
+
                             placeholder="Insira sua mensagem aqui..."
                             type="textarea"
                             styleSheet={{
@@ -92,12 +127,12 @@ function Header() {
 }
 
 function MessageList(props) {
-    console.log('MessageList', props);
+    const mensagens = props.mensagens;
     return (
         <Box
             tag="ul"
             styleSheet={{
-                overflow: 'scroll',
+                overflowY: 'auto',
                 display: 'flex',
                 flexDirection: 'column-reverse',
                 flex: 1,
@@ -105,7 +140,7 @@ function MessageList(props) {
                 marginBottom: '16px',
             }}
         >
-
+            {mensagens.map((mensagem) =>
             <Text
                 key={mensagem.id}
                 tag="li"
@@ -131,10 +166,10 @@ function MessageList(props) {
                             display: 'inline-block',
                             marginRight: '8px',
                         }}
-                        src={`https://github.com/vanessametonini.png`}
+                        src={`https://github.com/diogzz.png`}
                     />
                     <Text tag="strong">
-                        {mensagem.de}
+                        {mensagem.usuario}
                     </Text>
                     <Text
                         styleSheet={{
@@ -149,6 +184,7 @@ function MessageList(props) {
                 </Box>
                 {mensagem.texto}
             </Text>
+            )}
         </Box>
     )
 }
