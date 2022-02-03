@@ -35,7 +35,6 @@ function Titulo(props) {
 	export default function PaginaInicial() {
 	const [username, setUserName] = React.useState('Diogzz');
 	const router = useRouter();
-	export default username;
 
 	return (
 	<>
