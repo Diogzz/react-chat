@@ -17,6 +17,7 @@ export default function ChatPage() {
         supabaseClient
         .from('mensagens')
         .select('*')
+        .order('id', {ascending:false})
         .then(({data}) => {
             console.log(data)
             setMensagemList(data);
@@ -26,15 +27,20 @@ export default function ChatPage() {
     function handleNovaMensagem(novaMensagem) {
 
         novaMensagem = {
-            id: mensagemList.length + 1,
             texto: novaMensagem,
             usuario: 'Diogo'
         }
 
-        setMensagemList([
-            novaMensagem,
-            ...mensagemList
-        ]);
+        supabaseClient
+        .from('mensagens')
+        .insert([novaMensagem])
+        .then(({data})=>{
+            setMensagemList([
+                data[0],
+                ...mensagemList
+            ]);
+        })
+
     }
 
     return (
